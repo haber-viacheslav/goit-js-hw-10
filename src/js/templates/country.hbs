@@ -1,0 +1,15 @@
+{{!-- {{#each this}} --}}
+<svg width='30' height='30'>
+  <use href='{{flags.svg}}'></use>
+</svg>
+<h2 class='country-title'>{{name.official}}</h2>
+<p class='country-descr'>Capital:<span>{{capital}}</span></p>
+<p class='country-descr'>Polulation:<span>{{population}}</span></p>
+<p class='country-descr'>Languages:
+  {{!-- {{#each this}} --}}
+  <span>
+    {{languages}}
+  </span>
+  {{!-- {{/each}} --}}
+</p>
+{{!-- {{/each}} --}}
