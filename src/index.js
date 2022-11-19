@@ -1,8 +1,14 @@
 import './css/styles.css';
-// import './js/modules/search-module';
-// import './js/modules/render-module';
 import debounce from 'lodash.debounce';
-
+import { fetchCountries } from './js/modules/fetch-data';
+import {
+  notifyInfoMessage,
+  notifyFailureMessage,
+} from './js/modules/notify-msg';
+import {
+  renderCountryCard,
+  renderCountriesList,
+} from './js/modules/render-module';
 const DEBOUNCE_DELAY = 300;
 
 const refs = {
@@ -14,40 +20,24 @@ const refs = {
 refs.searchForm.addEventListener('input', debounce(onSearch, DEBOUNCE_DELAY));
 
 function onSearch(e) {
-  const searchQuery = e.target.value;
+  const searchQuery = e.target.value.trim();
+  console.log(searchQuery);
 
   if (!searchQuery) {
-    return;
+    return (refs.countriesList.innerHTML = '');
   }
-  fetchSearchedCountry(searchQuery).then(country => {
-    console.log(country);
-    console.log(country[1].languages);
 
-    refs.countriesList.innerHTML = renderCountriesList(country);
-  });
-}
-
-function fetchSearchedCountry(searchValue) {
-  return fetch(`https://restcountries.com/v3.1/name/${searchValue}`)
-    .then(response => {
-      return response.json();
+  fetchCountries(searchQuery)
+    .then(country => {
+      if (country.length > 10) {
+        refs.countriesList.innerHTML = '';
+        return notifyInfoMessage();
+      }
+      if (country.length > 1 && country.length < 10) {
+        refs.countriesList.innerHTML = renderCountriesList(country);
+      } else {
+        refs.countriesList.innerHTML = renderCountryCard(country);
+      }
     })
-    .catch(error => console.log(error));
+    .catch(error => notifyFailureMessage());
 }
-
-//{flags.svg, name.official, capital, population, languages}
-function renderCountriesList(countries) {
-  return countries
-    .map(country => {
-      return `<svg width='30' height='30'>
-    <use href='${country.flags.svg}'></use>
-    </svg>
-    <h2 class='country-title'>${country.name.official}</h2>
-    <p class='country-descr'>Capital:<span> ${country.capital}</span></p>
-    <p class='country-descr'>Polulation:<span> ${country.population}</span></p>
-    <p class='country-descr'>Languages:<span> ${country.languages}</span></p>`;
-    })
-    .join('');
-}
-
-function renderCountryCard() {}
