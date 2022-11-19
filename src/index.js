@@ -21,22 +21,22 @@ refs.searchForm.addEventListener('input', debounce(onSearch, DEBOUNCE_DELAY));
 
 function onSearch(e) {
   const searchQuery = e.target.value.trim();
-  console.log(searchQuery);
+  refs.countriesList.innerHTML = '';
+  refs.countryCard.innerHTML = '';
 
   if (!searchQuery) {
-    return (refs.countriesList.innerHTML = '');
+    return;
   }
 
   fetchCountries(searchQuery)
     .then(country => {
       if (country.length > 10) {
-        refs.countriesList.innerHTML = '';
         return notifyInfoMessage();
       }
       if (country.length > 1 && country.length < 10) {
         refs.countriesList.innerHTML = renderCountriesList(country);
       } else {
-        refs.countriesList.innerHTML = renderCountryCard(country);
+        refs.countryCard.innerHTML = renderCountryCard(country);
       }
     })
     .catch(error => notifyFailureMessage());
