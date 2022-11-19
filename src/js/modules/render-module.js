@@ -2,8 +2,8 @@ function renderCountriesList(arr) {
   return arr
     .map(country => {
       return `
-    <li>
-      <img src="${country.flags.svg}" alt="${country.name}" width="80" height="60">
+    <li class="country__item">
+      <img class="country__img" src="${country.flags.svg}" alt="${country.name}" width="80">
       <h2>${country.name.official}</h2>
     </li>`;
     })
@@ -13,19 +13,18 @@ function renderCountriesList(arr) {
 function renderCountryCard(arr) {
   return arr
     .map(country => {
-      return `
-      <img src="${country.flags.svg}" alt="${
-        country.name
-      }" width="80" height="60">
-      <h2 class='country-title'>${country.name.official}</h2>
-      <p class='country-descr'>Capital:<span> ${country.capital}</span></p>
-      <p class='country-descr'>Polulation:<span> ${
+      return `<div class="country-wrapper">
+      <img src="${country.flags.svg}" alt="${country.name}" width="160">
+      <h2 class='country__title'>${country.name.official}</h2>
+      <p class='country__descr'>Capital:<span> ${country.capital}</span></p>
+      <p class='country__descr'>Polulation:<span> ${
         country.population
       }</span></p>
-      <p class='country-descr'>Languages:<span> ${Object.values(
+      <p class='country__descr'>Languages:<span> ${Object.values(
         country.languages
-      )}</span></p>`;
+      )}</span></p></div>`;
     })
     .join('');
 }
+
 export { renderCountriesList, renderCountryCard };

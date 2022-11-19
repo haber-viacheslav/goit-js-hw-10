@@ -7,9 +7,9 @@ body {
     Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #fafafa;
-  color: #212121;
+  color: #ffffff;
   line-height: 1.5;
+  background-color: #221e32;
 }
 
 #search-box {
@@ -30,4 +30,40 @@ body {
     -7px -5px 15px 5px #19007d, 12px -5px 15px 5px #1300c2,
     12px 10px 15px 7px #19007d, -10px 10px 15px 7px #1300c2,
     -10px -7px 27px 1px #1900ff, 5px 5px 15px 5px rgba(0, 142, 178, 0.464);
+}
+
+.country-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.country__item {
+  display: inline-block;
+  padding: 10px;
+  border-radius: 20px;
+  border: 1px solid #0d013e;
+  background: linear-gradient(145deg, #0d013e, #2711ba);
+  box-shadow: 12px 12px 30px #2e2bc2, -12px -12px 30px #1d06eb;
+}
+
+.country__item {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.country__img {
+  background-size: contain;
+}
+
+.country-wrapper {
+  display: inline-block;
+  margin-left: 30px;
+  padding: 30px;
+  border-radius: 20px;
+  border: 1px solid #0d013e;
+  background: linear-gradient(145deg, #0d013e, #2711ba);
+  box-shadow: 12px 12px 30px #2e2bc2, -12px -12px 30px #1d06eb;
 }
